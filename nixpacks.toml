@@ -1,5 +1,8 @@
 [phases.setup]
-nixPkgs = ["python313", "libX11", "libXext", "libGL", "cmake", "gcc", "pkg-config"]
+nixPkgs = ["libX11", "libXext", "libGL", "cmake", "gcc", "pkg-config", "dlib"]
+
+[phases.install]
+cmds = ["pip install -r requirements.txt"]
 
 [start]
 cmd = "python manage.py migrate && python manage.py populate_subjects && gunicorn config.wsgi:application --bind 0.0.0.0:$PORT --workers 2"
